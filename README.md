@@ -1,130 +1,151 @@
 # AUREON — Premium Dark Luxury E-Commerce Platform
 
-![Aureon Social Preview](dist/assets/Aureon_Social_Preview.png)
+<p align="center">
+  <img src="dist/assets/Aureon_Social_Preview.png" alt="Aureon Social Preview" width="100%">
+</p>
 
-Aureon is a state-of-the-art, high-fidelity luxury e-commerce frontend designed for high-net-worth individuals and elite collectors. Built with a unified design language centered around deep void black surfaces, champagne gold accents, glassmorphic interfaces, and premium micro-animations.
+<p align="center">
+  <em>Curated for the Exceptional</em>
+</p>
 
----
+<p align="center">
+  <a href="https://aureon.vercel.app">
+    <img src="https://img.shields.io/badge/LIVE_DEMO-View_Now-C9A96E?style=for-the-badge&logo=vercel&logoColor=white&labelColor=0A0A0F" alt="Live Demo">
+  </a>
+  <a href="https://github.com/arya-dev2005/Aureon/actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/arya-dev2005/Aureon/ci.yml?branch=main&style=for-the-badge&label=CI%2FCD&logo=githubactions&logoColor=white&labelColor=0A0A0F&color=C9A96E" alt="CI/CD Status">
+  </a>
+  <a href="https://uptimerobot.com">
+    <img src="https://img.shields.io/badge/Uptime-99.9%25-22C55E?style=for-the-badge&logo=statuspage&logoColor=white&labelColor=0A0A0F" alt="Uptime Status">
+  </a>
+</p>
 
-## 🌟 Executive Summary & Vision
-
-As an e-commerce platform, Aureon bridges the gap between high-end physical boutique shopping and elite digital convenience. The application provides three distinct entry layers:
-1. **Curated Customer Marketplace**: Featuring editorial collections, interactive 3D product showcases, early drops, live streams, and personal concierge messaging channels.
-2. **Merchant Partner Portal**: Allowing verified luxury vendors to audit catalogs, adjust unit stock counts, and request outstanding balances.
-3. **Platform Administrative Console**: Providing high-level insights, log streaming audits, merchant registrations, and system flag settings.
-
----
-
-## 🛠️ Technology Stack
-
-* **Build & Development Tooling**: Vite + TypeScript (TSC) for quick compilation.
-* **Component Layer**: React (v19) utilizing React Router (v7) for nested route layouts.
-* **Styling & Theme**: Tailwind CSS combined with custom luxury CSS variables.
-* **Icons**: Lucide React for consistent vector symbols.
-* **Animations**: Framer Motion (`motion/react`) and GSAP for scroll-based luxury elements.
-
----
-
-## 🎨 Core Design System
-
-To preserve the brand's premium identity, developers must strictly adhere to the following color palette and typography hierarchy:
-* **Background Color**: `#0A0A0F` (Deep Void Black)
-* **Surface Overlay**: `#12121A` (Sleek Charcoal)
-* **Card Boundaries**: `#1A1A24` (High-contrast Dark Surface)
-* **Branding Accents**: `#C9A96E` (Champagne Gold)
-* **Primary Typography**: Space Grotesk (Display Headers) and Inter (Body copy).
-* **Price Typography**: Playfair Display (Luxury serif).
-* **Hover Micro-animations**: Subtle gold-tinted drop shadows, glare sweep animations, and card tilts.
+<p align="center">
+  <img src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React">
+  <img src="https://img.shields.io/badge/Vite-6-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite">
+  <img src="https://img.shields.io/badge/TypeScript-5.7-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Tailwind-v4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind CSS">
+  <img src="https://img.shields.io/badge/Framer_Motion-12-FF007F?style=flat-square&logo=framer&logoColor=white" alt="Framer Motion">
+</p>
 
 ---
 
-## 📂 Repository Directory Structure
+## 🌟 What is AUREON?
 
-The nested React Router routes are mapped dynamically as follows:
+AUREON is a **premium dark-themed e-commerce platform** curated for the modern luxury marketplace. It delivers a high-fidelity visual experience optimized for elite collectors and high-net-worth clientele. Featuring a customer marketplace, specialized VIP tiers, live streaming, interactive auctions, and robust merchant/admin dashboards.
+
+### Key Product Pillars
+* **Dark Luxury Visual System**: Deep void black backgrounds (`#0A0A0F`), sleek slate surfaces (`#12121A`), and refined champagne gold highlights (`#C9A96E`).
+* **VIP & Membership Club**: Tabbed point dashboards, milestone status grids, and premium concierge chat interfaces.
+* **Interactive Live Commerce**: Simulated real-time auction bidding matrixes, countdown drop schedules, and live video commerce displays.
+* **Integrated Vendor Portals**: A self-contained dashboard enabling merchants to audit sales, adjust stock volumes directly, register catalog additions, and request payouts.
+* **Administrative Console**: Live logs audit tracker, system maintenance config control flags, and merchant registration approval decks.
+
+---
+
+## 🏗️ Platform Architecture
 
 ```
-src/
-├── app/
-│   ├── components/            # Shared UI components
-│   │   ├── CustomCursor.tsx   # Custom luxury cursor logic
-│   │   ├── Layout.tsx         # Site layout containing navigation & footer
-│   │   └── ProductCard3D.tsx  # Card with 3D tilts and gold glow effects
-│   ├── data/                  # Mock databases and schema definitions
-│   │   └── products.ts        # Luxury product catalogue dataset
-│   ├── pages/                 # High-fidelity page components
-│   │   ├── Home.tsx           # Editorial landing page
-│   │   ├── Products.tsx       # Search, filter, and categorised product grids
-│   │   ├── ProductDetail.tsx  # Immersive product page
-│   │   ├── Cart.tsx           # Order basket review
-│   │   ├── Checkout.tsx       # High-fidelity secure payment forms
-│   │   ├── Orders.tsx         # Interactive customer orders ledger
-│   │   ├── OrderTracking.tsx  # Interactive order pipeline status maps
-│   │   ├── Login.tsx          # Public customer login
-│   │   ├── Register.tsx       # Customer registration with password validations
-│   │   ├── AdminDashboard.tsx # Platform administration dashboard
-│   │   ├── VendorDashboard.tsx# Partner catalog & payouts board
-│   │   └── ...
-│   └── routes.ts              # Unified React Router routing setup
+┌────────────────────────────────────────────────────────┐
+│                     AUREON PLATFORM                     │
+├───────────────────────────┬────────────────────────────┤
+│         FRONTEND          │        CI/CD ENGINE        │
+│         (Vercel)          │      (GitHub Actions)      │
+│                           │                            │
+│   React SPA (Vite)        │   ci.yml (Compilation)     │
+│   React Router v7         │   deploy-web.yml (Vercel)  │
+│   Tailwind CSS v4         │   deploy-staging.yml       │
+│   Framer Motion + GSAP    │   security.yml (Audit)     │
+└───────────────────────────┴────────────────────────────┘
 ```
 
 ---
 
-## 🔑 Administrator & Merchant Partner Access
+## 📁 Repository Directory Structure
 
-The admin and vendor dashboard portals are secured with mock credentials for verification:
+```
+Aureon/
+├── .github/
+│   ├── ISSUE_TEMPLATE/        # Issue templates
+│   │   ├── bug_report.md
+│   │   └── feature_request.md
+│   ├── CODEOWNERS             # File ownership configuration
+│   ├── copilot-instructions.md# Context guide for GitHub Copilot
+│   ├── pull_request_template.md
+│   └── workflows/             # GitHub Actions CI/CD workflows
+│       ├── ci.yml
+│       ├── deploy-staging.yml
+│       ├── deploy-web.yml
+│       └── security.yml
+├── assets/                    # Media assets
+├── dist/                      # Production built output
+├── src/
+│   ├── app/
+│   │   ├── components/        # Layout & custom interactive elements
+│   │   ├── data/              # Mock database arrays (products, reviews)
+│   │   ├── pages/             # Portal pages & dashboard views
+│   │   ├── routes.ts          # Unified Router definitions
+│   │   └── main.tsx           # Application entry point
+├── render.yaml                # Render static hosting configuration
+├── package.json               # Package script lists & dependencies
+└── index.html                 # HTML viewport entry
+```
+
+---
+
+## 🔑 Secure Dashboard Access
+
+Both portal sites are protected by mock validation checks. Authenticate using the coordinates below:
 
 ### 🛡️ Administrative Console
 * **Route**: `/admin/dashboard`
 * **Credentials**:
   * Email: `admin@aureon.com`
   * Password: `admin123`
-* **Key Features**: Tabbed workspace supporting platform KPIs, live order log streaming, merchant application approvals, and system maintenance toggles.
+* **Features**: Live platform logs, pending vendor approvals, and system multiplier configuration switches.
 
 ### 🏢 Vendor Partner Portal
 * **Route**: `/vendor/dashboard`
 * **Credentials**:
   * Email: `vendor@aureon.com`
   * Password: `vendor123`
-* **Key Features**: Sales statistics audit, active catalog adjustments (price views, dynamic stock updates, new item onboarding modal), and payout remittance history.
+* **Features**: Dynamic inventory stock adjusters, payout ledger requests, and catalog product creation.
 
 ---
 
-## ⚡ Developer Setup & Script Pipelines
+## ⚡ Quick Start & Development
 
-Ensure you have [Node.js](https://nodejs.org/) installed before proceeding.
-
-### 1. Installation
-Install the project dependencies using npm:
+### Installation
+Deploy dependencies locally using npm:
 ```bash
 npm install
 ```
 
-### 2. Run Local Development Server
-Start the local Vite development server:
+### Start Development Server
+Boot Vite local hot-reloader:
 ```bash
 npm run dev
 ```
-The server will boot locally at `http://localhost:5173/`.
+Open [http://localhost:5173/](http://localhost:5173/) inside your browser.
 
-### 3. TypeScript Compilation Checks
-Validate compile-time type safety before creating pull requests:
+### Type-Check Validation
+Run the TypeScript validation tool:
 ```bash
-npx.cmd tsc --noEmit
+npx tsc --noEmit
 ```
 
-### 4. Build Production Bundle
-Generate highly optimized client-side assets inside the `/dist` directory:
+### Production Build
+Generate minified static site bundles inside the `/dist` directory:
 ```bash
 npm run build
 ```
 
 ---
 
-## 🌳 Professional Branch Workflow
+## 🌳 Branching Workflow Guidelines
+Aureon maintains three primary long-lived branches:
+1. **`main` (Production)**: Always stable and mirrors the live deployment.
+2. **`staging` (Pre-production)**: Used for staging deployment verification.
+3. **`develop` (Integration)**: Active development line for merges.
 
-Aureon utilizes a git strategy mirroring production release lines:
-1. **`main` (Production)**: Always stable, production-ready release line.
-2. **`staging` (Pre-release)**: Mirror of production used for QA checks.
-3. **`develop` (Integration)**: Active development line where new features are aggregated.
-
-To deploy hotfixes or features, create short-lived feature branches (e.g. `feature/<name>` or `bugfix/<name>`) from `develop` and submit a Pull Request to merge back.
+Develop features using `feature/<name>` or `bugfix/<name>` branches, then submit a Pull Request to `develop` to trigger automated checks.

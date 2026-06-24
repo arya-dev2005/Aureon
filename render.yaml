@@ -1,0 +1,13 @@
+# AUREON Render Blueprint — Static Site Infrastructure
+# Deploy this via Render Dashboard → Blueprints
+
+services:
+  - type: web
+    name: aureon-frontend
+    runtime: static
+    plan: free
+    region: oregon
+    branch: main
+    buildCommand: npm install && npm run build
+    publishPath: dist
+    autoDeploy: true
