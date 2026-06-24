@@ -31,7 +31,7 @@ AUREON is a **premium e-commerce platform** curated for the modern luxury market
 
 ```
 ┌────────────────────────────────────────────────────────┐
-│                     AUREON PLATFORM                     │
+│                     AUREON PLATFORM                    │
 ├───────────────────────────┬────────────────────────────┤
 │         FRONTEND          │        CI/CD ENGINE        │
 │         (Vercel)          │      (GitHub Actions)      │
