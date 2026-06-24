@@ -1,6 +1,6 @@
-# AUREON — Premium Dark Luxury E-Commerce Platform
+![Aureon Social Preview](assets/Aureon_Social_Preview.png)
 
-![Aureon Social Preview](dist/assets/Aureon_Social_Preview.png)
+# AUREON — Premium Dark Luxury E-Commerce Platform
 
 Aureon is a state-of-the-art, high-fidelity luxury e-commerce frontend designed for high-net-worth individuals and elite collectors. Built with a unified design language centered around deep void black surfaces, champagne gold accents, glassmorphic interfaces, and premium micro-animations.
 
