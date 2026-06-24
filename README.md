@@ -147,14 +147,4 @@ Aureon maintains three primary long-lived branches:
 1. **`main` (Production)**: Always stable and mirrors the live deployment.
 2. **`staging` (Pre-production)**: Used for staging deployment verification.
 3. **`develop` (Integration)**: Active development line for merges.
-
-<<<<<<< HEAD
-Aureon utilizes a git strategy mirroring production release lines:
-1. **`main` (Production)**: Always stable, production-ready release line.
-2. **`staging` (Pre-release)**: Mirror of production used for QA checks.
-3. **`develop` (Integration)**: Active development line where new features are aggregated.
-
-To deploy hotfixes or features, create short-lived feature branches (e.g. `feature/<name>` or `bugfix/<name>`) from `develop` and submit a Pull Request to merge back.
-=======
-Develop features using `feature/<name>` or `bugfix/<name>` branches, then submit a Pull Request to `develop` to trigger automated checks.
->>>>>>> staging
+---
