@@ -1,0 +1,87 @@
+/* AUREON 3D Dark Luxury Commerce Custom Styles */
+
+/* 3D Gold Extrusion text shadow */
+.text-3d-gold {
+  text-shadow: 
+    0.5px 0.5px 0px #8b7040,
+    1px 1px 0px #80663a,
+    1.5px 1.5px 0px #705830,
+    2px 2px 0px #604a28,
+    3px 3px 6px rgba(0, 0, 0, 0.95);
+}
+
+/* Floating pedestal and reflection */
+@keyframes floatPedestal {
+  0%, 100% {
+    transform: rotateX(72deg) rotateY(0deg) translateZ(-60px) scale(1);
+    opacity: 0.85;
+    filter: blur(1px);
+  }
+  50% {
+    transform: rotateX(72deg) rotateY(0deg) translateZ(-60px) scale(0.96);
+    opacity: 0.65;
+    filter: blur(3px);
+  }
+}
+
+/* 3D Orbit Ring Keyframes */
+@keyframes orbitRing1 {
+  0% {
+    transform: rotateX(68deg) rotateY(12deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(68deg) rotateY(12deg) rotateZ(360deg);
+  }
+}
+
+@keyframes orbitRing2 {
+  0% {
+    transform: rotateX(55deg) rotateY(-20deg) rotateZ(360deg);
+  }
+  100% {
+    transform: rotateX(55deg) rotateY(-20deg) rotateZ(0deg);
+  }
+}
+
+/* Shimmer sweeper for 3D skeleton loading states */
+@keyframes skeletonGlared {
+  0% {
+    left: -150%;
+  }
+  100% {
+    left: 150%;
+  }
+}
+
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.skeleton-shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(201, 169, 110, 0.06) 35%,
+    rgba(240, 217, 154, 0.12) 50%,
+    rgba(201, 169, 110, 0.06) 65%,
+    transparent 100%
+  );
+  animation: skeletonGlared 1.8s infinite linear;
+}
+
+/* GPU acceleration hint */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-transform-opacity {
+  will-change: transform, opacity;
+}
