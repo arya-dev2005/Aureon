@@ -1,4 +1,6 @@
-![Aureon Social Preview](assets/Aureon_Social_Preview.png)
+<p align="center">
+  <img src="assets/Aureon_Social_Preview.png" alt="Aureon Social Preview" width="100%">
+</p>
 
 # AUREON — Premium Dark Luxury E-Commerce Platform
 
