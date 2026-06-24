@@ -1,0 +1,17 @@
+# Branch naming conventions
+allowed_prefixes:
+  - feature/     # New features
+  - bugfix/      # Bug fixes
+  - hotfix/      # Production hotfixes
+  - release/     # Release branches
+  - docs/        # Documentation updates
+  - refactor/    # Code refactoring
+  - test/        # Test additions
+  - chore/       # Maintenance tasks
+
+examples:
+  - feature/vip-membership-dashboard
+  - bugfix/cart-quantity-sync
+  - hotfix/stripe-webhook-signature
+  - release/v1.2.0
+  - docs/api-authentication
