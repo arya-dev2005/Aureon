@@ -16,13 +16,49 @@ const NAV_LINKS = [
   { to: "/products?cat=Eyewear", label: "Eyewear" },
   { to: "/products", label: "All Products" },
   { to: "/products?sort=new", label: "New Arrivals" },
+  { to: "/membership", label: "VIP Club" },
+  { to: "/live", label: "Live Commerce" },
 ];
 
 const FOOTER_COLS = [
-  { title: "Shop", links: ["New Arrivals", "Bestsellers", "Flash Deals", "Premium Collection", "Brands"] },
-  { title: "Support", links: ["Help Center", "Track Order", "Returns", "Size Guide", "Contact Us"] },
-  { title: "Company", links: ["About Us", "Careers", "Press", "Sustainability", "Affiliates"] },
-  { title: "Legal", links: ["Privacy Policy", "Terms of Service", "Cookie Policy", "Accessibility"] },
+  {
+    title: "Shop",
+    links: [
+      { label: "New Arrivals", to: "/products?sort=new" },
+      { label: "Bestsellers", to: "/products?sort=bestseller" },
+      { label: "Flash Deals", to: "/flash-sales" },
+      { label: "Live Auctions", to: "/live/auctions" },
+      { label: "VIP Membership", to: "/membership" },
+    ],
+  },
+  {
+    title: "Support",
+    links: [
+      { label: "Help Center", to: "/faq" },
+      { label: "Track Order", to: "/account/orders/1001/track" },
+      { label: "Shipping & Returns", to: "/shipping" },
+      { label: "Contact Us", to: "/contact" },
+      { label: "Trust & Security", to: "/trust" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About Us", to: "/about" },
+      { label: "Become a Seller", to: "/become-seller" },
+      { label: "Vendor Portal", to: "/vendor/dashboard" },
+      { label: "Admin Console", to: "/admin/dashboard" },
+      { label: "Live Streams", to: "/live" },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      { label: "Privacy Policy", to: "/privacy" },
+      { label: "Terms of Service", to: "/terms" },
+      { label: "Cookie Policy", to: "/cookies" },
+    ],
+  },
 ];
 
 export function LogoWordmark({ className = "", size = "lg" }: { className?: string; size?: "sm" | "md" | "lg" }) {
@@ -354,7 +390,15 @@ export function Layout() {
                 <h4 className="text-[11px] font-bold tracking-[0.14em] uppercase mb-4" style={{ color: "#F8F8FC" }}>{col.title}</h4>
                 <ul className="space-y-2.5">
                   {col.links.map(link => (
-                    <li key={link}><a href="#" className="text-xs text-zinc-700 hover:text-white transition-colors duration-200 hover:underline decoration-[#C9A96E] underline-offset-2">{link}</a></li>
+                    <li key={link.label}>
+                      <Link
+                        to={link.to}
+                        className="text-xs text-zinc-700 hover:text-white transition-colors duration-200 hover:underline decoration-[#C9A96E] underline-offset-2"
+                        style={{ textDecorationColor: "#C9A96E" }}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
                   ))}
                 </ul>
               </div>
