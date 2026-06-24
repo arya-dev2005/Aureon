@@ -1,0 +1,12 @@
+# Global fallback
+* @arya-dev2005
+
+# GitHub Workflows & Configurations
+.github/workflows/ @arya-dev2005
+package.json @arya-dev2005
+tsconfig.json @arya-dev2005
+vite.config.ts @arya-dev2005
+
+# Source and Assets
+src/ @arya-dev2005
+assets/ @arya-dev2005
