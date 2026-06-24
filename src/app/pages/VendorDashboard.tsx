@@ -88,7 +88,7 @@ export function VendorDashboard() {
       id: `P-0${catalog.length + 1}`,
       name: newName,
       sku: newSku,
-      price: Number(newName) || Number(newPrice),
+      price: Number(newPrice),
       stock: Number(newStock),
     };
     setCatalog(prev => [...prev, newItem]);
