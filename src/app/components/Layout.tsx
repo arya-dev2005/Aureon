@@ -128,6 +128,7 @@ export function Layout() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchVal, setSearchVal] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   const [cartScope, animateCart] = useAnimate();
@@ -288,34 +289,108 @@ export function Layout() {
             </motion.div>
           </Link>
 
-          <Link to="/account" style={{ textDecoration: "none" }}>
-            <motion.div
-              whileHover={{ scale: 1.06 }}
-              whileTap={{ scale: 0.93 }}
-              className="relative w-10 h-10 rounded-xl flex items-center justify-center"
-              style={{
-                background: "#10101A",
-                border: "1px solid rgba(255,255,255,0.06)",
-                boxShadow: "3px 3px 8px #060609, -2px -2px 6px #161622",
-                color: "#71717A",
-                transition: "border 0.2s, box-shadow 0.2s, color 0.2s",
-              }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.border = "1px solid rgba(201,169,110,0.38)";
-                el.style.boxShadow = "3px 3px 8px #060609, -2px -2px 6px #161622, 0 0 16px rgba(201,169,110,0.12)";
-                el.style.color = "#F8F8FC";
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.border = "1px solid rgba(255,255,255,0.06)";
-                el.style.boxShadow = "3px 3px 8px #060609, -2px -2px 6px #161622";
-                el.style.color = "#71717A";
-              }}
-            >
-              <User size={17} />
-            </motion.div>
-          </Link>
+          <div
+            className="relative text-left"
+            onMouseEnter={() => setUserMenuOpen(true)}
+            onMouseLeave={() => setUserMenuOpen(false)}
+          >
+            <Link to="/account" style={{ textDecoration: "none" }}>
+              <motion.div
+                whileHover={{ scale: 1.06 }}
+                whileTap={{ scale: 0.93 }}
+                className="relative w-10 h-10 rounded-xl flex items-center justify-center cursor-pointer"
+                style={{
+                  background: "#10101A",
+                  border: "1px solid rgba(255,255,255,0.06)",
+                  boxShadow: "3px 3px 8px #060609, -2px -2px 6px #161622",
+                  color: "#71717A",
+                  transition: "border 0.2s, box-shadow 0.2s, color 0.2s",
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.border = "1px solid rgba(201,169,110,0.38)";
+                  el.style.boxShadow = "3px 3px 8px #060609, -2px -2px 6px #161622, 0 0 16px rgba(201,169,110,0.12)";
+                  el.style.color = "#F8F8FC";
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.border = "1px solid rgba(255,255,255,0.06)";
+                  el.style.boxShadow = "3px 3px 8px #060609, -2px -2px 6px #161622";
+                  el.style.color = "#71717A";
+                }}
+              >
+                <User size={17} />
+              </motion.div>
+            </Link>
+
+            <AnimatePresence>
+              {userMenuOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 8, scale: 0.95 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute right-0 mt-2 w-48 rounded-xl p-2 border border-white/[0.06] z-50"
+                  style={{
+                    background: "rgba(18,18,26,0.98)",
+                    backdropFilter: "blur(16px)",
+                    boxShadow: "0 10px 30px rgba(0,0,0,0.5), 0 0 16px rgba(201,169,110,0.05)",
+                  }}
+                >
+                  <div className="flex flex-col gap-0.5">
+                    {[
+                      { to: "/account", label: "My Profile" },
+                      { to: "/orders", label: "My Orders" },
+                      { to: "/account/addresses", label: "Saved Addresses" },
+                      { to: "/account/payments", label: "Payment Methods" },
+                      { to: "/account/reviews", label: "Product Reviews" },
+                      { to: "/membership", label: "VIP Club Hub" },
+                    ].map(item => (
+                      <Link
+                        key={item.label}
+                        to={item.to}
+                        onClick={() => setUserMenuOpen(false)}
+                        className="px-3 py-2 rounded-lg text-xs transition-colors hover:text-white"
+                        style={{
+                          color: "#A1A1AA",
+                          textDecoration: "none",
+                          background: "transparent",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background = "rgba(201,169,110,0.08)";
+                          e.currentTarget.style.color = "#C9A96E";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = "transparent";
+                          e.currentTarget.style.color = "#A1A1AA";
+                        }}
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                    <div className="h-px bg-white/[0.04] my-1" />
+                    <Link
+                      to="/login"
+                      onClick={() => setUserMenuOpen(false)}
+                      className="px-3 py-2 rounded-lg text-xs font-semibold hover:text-[#C9A96E]"
+                      style={{
+                        color: "#C9A96E",
+                        textDecoration: "none",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = "rgba(201,169,110,0.08)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = "transparent";
+                      }}
+                    >
+                      Login / Register
+                    </Link>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
 
           <button className="md:hidden w-9 h-9 flex items-center justify-center text-zinc-400" onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X size={18} /> : <Menu size={18} />}

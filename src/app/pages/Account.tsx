@@ -6,10 +6,10 @@ const GOLD = "#C9A96E";
 const NEURO_SHADOW = "4px 4px 12px #060609, -3px -3px 9px #161624";
 
 const MOCK_USER = {
-  name: "Aryan Sharma",
-  email: "aryan@premium.store",
+  name: "Arya Das",
+  email: "arya.das@premium.store",
   phone: "+91 98765 43210",
-  avatar: "AS",
+  avatar: "AD",
   memberSince: "March 2023",
   tier: "Gold Member",
 };
@@ -300,7 +300,7 @@ export function Account() {
                     <p className="text-sm font-semibold" style={{ color: "#F8F8FC" }}>Two-Factor Authentication</p>
                     <p className="text-xs" style={{ color: "#A1A1AA" }}>Add an extra layer of security to your account</p>
                   </div>
-                  <Toggle on={true} onToggle={() => {}} />
+                  <Toggle on={true} onToggle={() => { }} />
                 </div>
 
                 {/* Active Sessions */}

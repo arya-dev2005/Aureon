@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { useNavigate } from "react-router";
 import { Package, Truck, CheckCircle2, XCircle, BarChart2, Star, RotateCcw, ChevronDown } from "lucide-react";
 
 const GOLD = "#C9A96E";
@@ -82,6 +83,7 @@ function filterOrders(orders: Order[], tab: FilterTab): Order[] {
 }
 
 export function Orders() {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<FilterTab>("All");
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
@@ -233,6 +235,7 @@ export function Orders() {
                       {/* Action buttons */}
                       <div className="flex flex-wrap gap-2">
                         <button
+                          onClick={() => navigate(`/account/orders/${order.id}/track`)}
                           className="px-4 py-2 rounded-xl text-xs font-semibold transition-all"
                           style={{
                             background: "transparent",
