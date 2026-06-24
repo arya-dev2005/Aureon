@@ -1,38 +1,22 @@
-# AUREON — Premium Dark Luxury E-Commerce Platform
-
 <p align="center">
   <img src="assets/Aureon_Social_Preview.png" alt="Aureon Social Preview" width="100%">
 </p>
 
-<p align="center">
-  <em>Curated for the Exceptional</em>
-</p>
+# AUREON — Curated for the Exceptional
+> **Premium E-Commerce Platform Curated for the Modern Luxury Marketplace**
 
-<p align="center">
-  <a href="https://aureon.vercel.app">
-    <img src="https://img.shields.io/badge/LIVE_DEMO-View_Now-C9A96E?style=for-the-badge&logo=vercel&logoColor=white&labelColor=0A0A0F" alt="Live Demo">
-  </a>
-  <a href="https://github.com/arya-dev2005/Aureon/actions">
-    <img src="https://img.shields.io/github/actions/workflow/status/arya-dev2005/Aureon/ci.yml?branch=main&style=for-the-badge&label=CI%2FCD&logo=githubactions&logoColor=white&labelColor=0A0A0F&color=C9A96E" alt="CI/CD Status">
-  </a>
-  <a href="https://uptimerobot.com">
-    <img src="https://img.shields.io/badge/Uptime-99.9%25-22C55E?style=for-the-badge&logo=statuspage&logoColor=white&labelColor=0A0A0F" alt="Uptime Status">
-  </a>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React">
-  <img src="https://img.shields.io/badge/Vite-6-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite">
-  <img src="https://img.shields.io/badge/TypeScript-5.7-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
-  <img src="https://img.shields.io/badge/Tailwind-v4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind CSS">
-  <img src="https://img.shields.io/badge/Framer_Motion-12-FF007F?style=flat-square&logo=framer&logoColor=white" alt="Framer Motion">
-</p>
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-6-646CFF?logo=vite&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?logo=typescript&logoColor=white)
+![Tailwind](https://img.shields.io/badge/Tailwind-v4-06B6D4?logo=tailwindcss&logoColor=white)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-FF007F?logo=framer&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-green)
 
 ---
 
-## 🌟 What is AUREON?
+## 🎯 Mission
 
-AUREON is a **premium dark-themed e-commerce platform** curated for the modern luxury marketplace. It delivers a high-fidelity visual experience optimized for elite collectors and high-net-worth clientele. Featuring a customer marketplace, specialized VIP tiers, live streaming, interactive auctions, and robust merchant/admin dashboards.
+AUREON is a **premium e-commerce platform** curated for the modern luxury marketplace. It delivers a high-fidelity visual experience optimized for elite collectors and high-net-worth clientele. Featuring a customer marketplace, specialized VIP tiers, live streaming, interactive auctions, and robust merchant/admin dashboards.
 
 ### Key Product Pillars
 * **Dark Luxury Visual System**: Deep void black backgrounds (`#0A0A0F`), sleek slate surfaces (`#12121A`), and refined champagne gold highlights (`#C9A96E`).
