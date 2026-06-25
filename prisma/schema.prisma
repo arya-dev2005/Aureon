@@ -13,6 +13,66 @@ model User {
   email     String   @unique
   password  String
   name      String?
+  role      String   @default("USER")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  reviews   Review[]
+  orders    Order[]
+}
+
+model Product {
+  id          Int         @id @default(autoincrement())
+  brand       String
+  name        String
+  price       Float
+  oldPrice    Float
+  discount    Int
+  rating      Float       @default(0)
+  reviewsCount Int        @default(0)
+  badge       String?
+  stock       String
+  premium     Boolean     @default(false)
+  emoji       String
+  category    String
+  description String
+  features    String[]
+  specs       Json
+  colors      String[]
+  tags        String[]
+  reviews     Review[]
+  orderItems  OrderItem[]
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userName  String
+  rating    Int
+  comment   String
+  createdAt DateTime @default(now())
+}
+
+model Order {
+  id            String      @id @default(uuid())
+  userId        String?
+  user          User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  totalAmount   Float
+  status        String      @default("PENDING")
+  paymentMethod String
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  items         OrderItem[]
+}
+
+model OrderItem {
+  id        String   @id @default(uuid())
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Restrict)
+  quantity  Int
+  price     Float
 }
