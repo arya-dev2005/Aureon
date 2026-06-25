@@ -173,7 +173,7 @@ export function Layout() {
         }}
       >
         {/* Logo */}
-        <Link to="/" className="shrink-0 group" style={{ textDecoration: "none" }}>
+        <Link to="/" aria-label="Aureon home" className="shrink-0 group" style={{ textDecoration: "none" }}>
           <LogoWordmark />
         </Link>
 
@@ -392,7 +392,11 @@ export function Layout() {
             </AnimatePresence>
           </div>
 
-          <button className="md:hidden w-9 h-9 flex items-center justify-center text-zinc-400" onClick={() => setMobileOpen(!mobileOpen)}>
+          <button
+            aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+            className="md:hidden w-9 h-9 flex items-center justify-center text-zinc-400"
+            onClick={() => setMobileOpen(!mobileOpen)}
+          >
             {mobileOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
