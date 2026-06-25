@@ -12,7 +12,7 @@ export function Login() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !password) {
       setError("Please fill in all fields.");
@@ -20,10 +20,29 @@ export function Login() {
     }
     setLoading(true);
     setError("");
-    setTimeout(() => {
-      setLoading(false);
+
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await response.json().catch(() => ({})) as { token?: string; error?: string };
+
+      if (!response.ok || !data.token) {
+        throw new Error(data.error ?? "Unable to sign in. Please try again.");
+      }
+
+      localStorage.setItem("aureon_token", data.token);
       navigate("/account");
-    }, 1500);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Unable to sign in. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

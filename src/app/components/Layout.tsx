@@ -9,6 +9,8 @@ import { CustomCursor } from "./CustomCursor";
 import { ScrollProgress } from "./ScrollProgress";
 import { useStore } from "../context/StoreContext";
 
+type ApiHealth = "checking" | "healthy" | "degraded" | "offline";
+
 const NAV_LINKS = [
   { to: "/products?cat=Watches", label: "Watches" },
   { to: "/products?cat=Jewellery", label: "Jewellery" },
@@ -129,6 +131,7 @@ export function Layout() {
   const [searchVal, setSearchVal] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [apiHealth, setApiHealth] = useState<ApiHealth>("checking");
   const navigate = useNavigate();
 
   const [cartScope, animateCart] = useAnimate();
@@ -146,6 +149,31 @@ export function Layout() {
     }
   }, [wishlist.length, animateWish]);
 
+  useEffect(() => {
+    const controller = new AbortController();
+
+    fetch("/api/health", {
+      signal: controller.signal,
+      credentials: "include",
+    })
+      .then(async response => {
+        if (!response.ok) {
+          setApiHealth(response.status === 503 ? "degraded" : "offline");
+          return;
+        }
+
+        const data = await response.json() as { status?: string; database?: string };
+        setApiHealth(data.status === "healthy" && data.database === "connected" ? "healthy" : "degraded");
+      })
+      .catch(error => {
+        if ((error as Error).name !== "AbortError") {
+          setApiHealth("offline");
+        }
+      });
+
+    return () => controller.abort();
+  }, []);
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchVal.trim()) {
@@ -154,6 +182,13 @@ export function Layout() {
       setSearchVal("");
     }
   };
+
+  const healthStyles = {
+    checking: { color: "#A1A1AA", background: "#71717A", label: "API checking" },
+    healthy: { color: "#22C55E", background: "#22C55E", label: "API healthy" },
+    degraded: { color: "#F59E0B", background: "#F59E0B", label: "API degraded" },
+    offline: { color: "#EF4444", background: "#EF4444", label: "API offline" },
+  }[apiHealth];
 
   return (
     <div style={{ background: "#0A0A0F", color: "#F8F8FC", fontFamily: "'Inter', sans-serif", minHeight: "100vh" }}>
@@ -201,6 +236,22 @@ export function Layout() {
 
         {/* Icon buttons */}
         <div className="flex items-center gap-2">
+          <div
+            className="hidden sm:flex items-center gap-2 h-10 px-3 rounded-xl border border-white/[0.06]"
+            style={{ background: "#10101A", color: healthStyles.color }}
+            title={healthStyles.label}
+            aria-label={healthStyles.label}
+          >
+            <span
+              className="w-2 h-2 rounded-full"
+              style={{
+                background: healthStyles.background,
+                boxShadow: `0 0 10px ${healthStyles.background}`,
+              }}
+            />
+            <span className="text-[10px] font-semibold uppercase tracking-wider">API</span>
+          </div>
+
           <Link to="/wishlist" style={{ textDecoration: "none" }}>
             <motion.div
               ref={wishScope}

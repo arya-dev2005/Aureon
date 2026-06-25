@@ -21,6 +21,7 @@ import { FAQ } from "./pages/FAQ";
 import { Shipping } from "./pages/Shipping";
 import { Legal } from "./pages/Legal";
 import { Trust } from "./pages/Trust";
+import { Diagnostics } from "./pages/Diagnostics";
 import { Addresses } from "./pages/Addresses";
 import { Payments } from "./pages/Payments";
 import { OrderTracking } from "./pages/OrderTracking";
@@ -72,6 +73,7 @@ export const router = createBrowserRouter([
       { path: "terms", Component: Legal },
       { path: "cookies", Component: Legal },
       { path: "trust", Component: Trust },
+      { path: "diagnostics", Component: Diagnostics },
       { path: "account/addresses", Component: Addresses },
       { path: "account/payments", Component: Payments },
       { path: "account/orders/:id/track", Component: OrderTracking },
