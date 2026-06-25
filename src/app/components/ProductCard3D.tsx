@@ -33,20 +33,11 @@ export function ProductCard3D({ product, flash = false, delay = 0 }: { product: 
   useEffect(() => {
     const isTouch = window.matchMedia("(pointer: coarse)").matches;
     if (isTouch) {
-      const handleOrientation = (e: DeviceOrientationEvent) => {
-        if (e.beta === null || e.gamma === null) return;
-        const b = e.beta - 50;
-        const g = e.gamma;
-        const targetX = Math.max(-5, Math.min(5, b * 0.12));
-        const targetY = Math.max(-5, Math.min(5, g * 0.12));
-        rotX.set(-targetX);
-        rotY.set(targetY);
-        // Softly slide the specular shine gradient based on orientation
-        shineX.set(50 + targetY * 8);
-        shineY.set(50 + targetX * 8);
-      };
-      window.addEventListener("deviceorientation", handleOrientation);
-      return () => window.removeEventListener("deviceorientation", handleOrientation);
+      rotX.set(0);
+      rotY.set(0);
+      shineX.set(50);
+      shineY.set(50);
+      return;
     }
   }, [rotX, rotY, shineX, shineY]);
 

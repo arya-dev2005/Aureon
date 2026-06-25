@@ -1,0 +1,19 @@
+{
+  "name": "AUREON — Curated for the Exceptional",
+  "short_name": "Aureon",
+  "description": "Aureon is a premium dark-themed storefront offering curated luxury timepieces, fine jewellery, and masterfully crafted accessories.",
+  "theme_color": "#0A0A0F",
+  "background_color": "#0A0A0F",
+  "display": "standalone",
+  "orientation": "portrait",
+  "start_url": "/",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
