@@ -117,22 +117,34 @@ export function Home() {
     const isMobileDevice = window.matchMedia("(pointer: coarse)").matches;
     const ctx = gsap.context(() => {
       gsap.utils.toArray<HTMLElement>(".section-header").forEach(el => {
-        gsap.fromTo(el,
-          { rotateX: 58, opacity: 0, y: 15 },
-          { rotateX: 0, opacity: 1, y: 0, duration: 0.85, ease: "power3.out",
-            scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none" } }
-        );
+        if (isMobileDevice) {
+          gsap.fromTo(el,
+            { opacity: 0, y: 12 },
+            { opacity: 1, y: 0, duration: 0.75, ease: "power2.out",
+              scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none none" } }
+          );
+        } else {
+          gsap.fromTo(el,
+            { rotateX: 58, opacity: 0, y: 15 },
+            { rotateX: 0, opacity: 1, y: 0, duration: 0.85, ease: "power3.out",
+              scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none" } }
+          );
+        }
       });
       gsap.utils.toArray<HTMLElement>(".card-animate").forEach((el, i) => {
         if (isMobileDevice) {
-          gsap.set(el, { opacity: 1, y: 0, rotateX: 0 });
-          return;
+          gsap.fromTo(el,
+            { opacity: 0, y: 18 },
+            { opacity: 1, y: 0, duration: 0.6, ease: "power1.out", delay: (i % 2) * 0.05,
+              scrollTrigger: { trigger: el, start: "top 92%", toggleActions: "play none none none" } }
+          );
+        } else {
+          gsap.fromTo(el,
+            { opacity: 0, y: 48, rotateX: 18, transformPerspective: 1000 },
+            { opacity: 1, y: 0, rotateX: 0, duration: 0.75, ease: "power2.out", delay: (i % 4) * 0.08,
+              scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none none" } }
+          );
         }
-        gsap.fromTo(el,
-          { opacity: 0, y: 48, rotateX: 18, transformPerspective: 1000 },
-          { opacity: 1, y: 0, rotateX: 0, duration: 0.75, ease: "power2.out", delay: (i % 4) * 0.08,
-            scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none none" } }
-        );
       });
     }, pageRef);
     return () => {

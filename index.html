@@ -1,22 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AUREON — Curated for the Exceptional</title>
+    <meta name="description" content="Aureon is a premium dark-themed storefront offering curated luxury timepieces, fine jewellery, and masterfully crafted accessories." />
+    <meta name="robots" content="noindex, nofollow" />
+    
+    <!-- PWA Integration -->
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/icon.svg" />
+    <meta name="theme-color" content="#0A0A0F" />
+    
+    <style>html, body { height: 100%; margin: 0; } #root { height: 100%; }</style>
+  </head>
 
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>AUREON — Curated for the Exceptional</title>
-      <meta name="description" content="Aureon is a premium dark-themed storefront offering curated luxury timepieces, fine jewellery, and masterfully crafted accessories." />
-      <meta name="robots" content="noindex, nofollow" />
-      <style>html, body { height: 100%; margin: 0; } #root { height: 100%; }</style>
-      
-    </head>
-
-    <body>
-      
-      <div id="root"></div>
-      <script type="module" src="/src/main.tsx"></script>
-      
-    </body>
-  </html>
-  
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Register PWA Service Worker -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/sw.js")
+            .then((reg) => console.log("Service Worker registered successfully:", reg.scope))
+            .catch((err) => console.error("Service Worker registration failed:", err));
+        });
+      }
+    </script>
+  </body>
+</html>

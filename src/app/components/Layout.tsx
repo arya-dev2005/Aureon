@@ -10,14 +10,17 @@ import { ScrollProgress } from "./ScrollProgress";
 import { useStore } from "../context/StoreContext";
 
 const NAV_LINKS = [
+  { to: "/products", label: "All Products", hasDropdown: true },
+  { to: "/products?sort=new", label: "New Arrivals" },
+  { to: "/membership", label: "VIP Club" },
+  { to: "/live", label: "Live Commerce" },
+];
+
+const PRODUCT_CATEGORIES = [
   { to: "/products?cat=Watches", label: "Watches" },
   { to: "/products?cat=Jewellery", label: "Jewellery" },
   { to: "/products?cat=Bags", label: "Bags" },
   { to: "/products?cat=Eyewear", label: "Eyewear" },
-  { to: "/products", label: "All Products" },
-  { to: "/products?sort=new", label: "New Arrivals" },
-  { to: "/membership", label: "VIP Club" },
-  { to: "/live", label: "Live Commerce" },
 ];
 
 const FOOTER_COLS = [
@@ -129,6 +132,8 @@ export function Layout() {
   const [searchVal, setSearchVal] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [hoveredAllProducts, setHoveredAllProducts] = useState(false);
+  const [mobileCategoriesOpen, setMobileCategoriesOpen] = useState(false);
   const navigate = useNavigate();
 
   const [cartScope, animateCart] = useAnimate();
@@ -201,7 +206,7 @@ export function Layout() {
 
         {/* Icon buttons */}
         <div className="flex items-center gap-2">
-          <Link to="/wishlist" style={{ textDecoration: "none" }}>
+          <Link to="/wishlist" className="hidden md:flex" style={{ textDecoration: "none" }}>
             <motion.div
               ref={wishScope}
               whileHover={{ scale: 1.06 }}
@@ -245,7 +250,7 @@ export function Layout() {
             </motion.div>
           </Link>
 
-          <Link to="/cart" style={{ textDecoration: "none" }}>
+          <Link to="/cart" className="hidden md:flex" style={{ textDecoration: "none" }}>
             <motion.div
               ref={cartScope}
               whileHover={{ scale: 1.06 }}
@@ -290,7 +295,7 @@ export function Layout() {
           </Link>
 
           <div
-            className="relative text-left"
+            className="hidden md:block relative text-left"
             onMouseEnter={() => setUserMenuOpen(true)}
             onMouseLeave={() => setUserMenuOpen(false)}
           >
@@ -404,21 +409,66 @@ export function Layout() {
 
       {/* Category strip */}
       <div className="hidden md:flex items-center gap-7 px-14 overflow-x-auto" style={{ height: 48, background: "#08080E", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
-        {NAV_LINKS.map(({ to, label }) => (
-          <NavLink
+        {NAV_LINKS.map(({ to, label, hasDropdown }) => (
+          <div
             key={label}
-            to={to}
-            end={to === "/products"}
-            className="relative shrink-0 text-[13px] font-medium pb-0.5 transition-colors duration-200"
-            style={({ isActive }) => ({ color: isActive ? "#F8F8FC" : "#71717A", textDecoration: "none" })}
+            className="relative shrink-0"
+            onMouseEnter={() => { if (hasDropdown) setHoveredAllProducts(true); }}
+            onMouseLeave={() => { if (hasDropdown) setHoveredAllProducts(false); }}
           >
-            {({ isActive }) => (
-              <>
-                {label}
-                {isActive && <span className="absolute -bottom-[13px] left-0 right-0 h-[2px] rounded-full" style={{ background: "linear-gradient(90deg,#C9A96E,#F0D99A,#C9A96E)" }} />}
-              </>
+            <NavLink
+              to={to}
+              end={to === "/products"}
+              className="text-[13px] font-medium pb-2.5 transition-colors duration-200 block"
+              style={({ isActive }) => ({ color: isActive ? "#F8F8FC" : "#71717A", textDecoration: "none" })}
+            >
+              {({ isActive }) => (
+                <span className="flex items-center gap-1">
+                  {label}
+                  {hasDropdown && <span className="text-[8px] opacity-70">▼</span>}
+                  {isActive && <span className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full" style={{ background: "linear-gradient(90deg,#C9A96E,#F0D99A,#C9A96E)" }} />}
+                </span>
+              )}
+            </NavLink>
+
+            {hasDropdown && (
+              <AnimatePresence>
+                {hoveredAllProducts && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute left-0 mt-1 w-44 rounded-xl p-2 border border-white/[0.06] z-50 shadow-2xl"
+                    style={{
+                      background: "rgba(18,18,26,0.98)",
+                      backdropFilter: "blur(16px)",
+                    }}
+                  >
+                    <div className="flex flex-col gap-0.5">
+                      {PRODUCT_CATEGORIES.map(cat => (
+                        <Link
+                          key={cat.label}
+                          to={cat.to}
+                          className="px-3 py-2 rounded-lg text-xs transition-colors hover:text-white text-zinc-400 no-underline"
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.background = "rgba(201,169,110,0.08)";
+                            e.currentTarget.style.color = "#C9A96E";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.background = "transparent";
+                            e.currentTarget.style.color = "#A1A1AA";
+                          }}
+                        >
+                          {cat.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             )}
-          </NavLink>
+          </div>
         ))}
       </div>
 
@@ -426,20 +476,126 @@ export function Layout() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="md:hidden fixed inset-0 top-[68px] z-40 flex flex-col gap-2 p-6"
-            style={{ background: "rgba(7,7,12,0.98)", backdropFilter: "blur(20px)" }}
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "spring", stiffness: 380, damping: 30 }}
+            className="md:hidden fixed inset-y-0 right-0 top-[68px] w-full sm:w-[320px] z-40 flex flex-col p-6 overflow-y-auto"
+            style={{
+              background: "rgba(10,10,15,0.98)",
+              backdropFilter: "blur(20px)",
+              borderLeft: "1px solid rgba(201,169,110,0.1)",
+              boxShadow: "-10px 0 30px rgba(0,0,0,0.6)"
+            }}
           >
-            {NAV_LINKS.map(({ to, label }) => (
-              <Link key={label} to={to} onClick={() => setMobileOpen(false)}
-                className="text-lg font-medium py-3 border-b"
-                style={{ color: "#F8F8FC", textDecoration: "none", borderColor: "rgba(255,255,255,0.06)" }}
-              >
-                {label}
-              </Link>
-            ))}
+            <div className="flex flex-col gap-3">
+              {/* Menu Links */}
+              {NAV_LINKS.map(link => {
+                if (link.hasDropdown) {
+                  return (
+                    <div key={link.label} className="border-b border-white/[0.06] py-1">
+                      <div className="flex justify-between items-center py-2">
+                        <Link to={link.to} onClick={() => setMobileOpen(false)} className="text-lg font-medium text-[#F8F8FC] no-underline">
+                          {link.label}
+                        </Link>
+                        <button
+                          onClick={() => setMobileCategoriesOpen(!mobileCategoriesOpen)}
+                          className="p-1 text-[#C9A96E] hover:text-white focus:outline-none"
+                        >
+                          <motion.span animate={{ rotate: mobileCategoriesOpen ? 180 : 0 }} className="inline-block text-xs">▼</motion.span>
+                        </button>
+                      </div>
+                      <AnimatePresence>
+                        {mobileCategoriesOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            className="overflow-hidden pl-4 flex flex-col gap-2.5 mt-1 pb-2"
+                          >
+                            {PRODUCT_CATEGORIES.map(cat => (
+                              <Link
+                                key={cat.label}
+                                to={cat.to}
+                                onClick={() => setMobileOpen(false)}
+                                className="text-sm font-medium text-zinc-400 no-underline hover:text-[#C9A96E] transition-colors"
+                              >
+                                {cat.label}
+                              </Link>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                }
+
+                return (
+                  <Link
+                    key={link.label}
+                    to={link.to}
+                    onClick={() => setMobileOpen(false)}
+                    className="text-lg font-medium py-3 border-b border-white/[0.06] text-[#F8F8FC] no-underline hover:text-[#C9A96E] transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
+
+              <div className="h-px bg-white/[0.06] my-4" />
+
+              {/* Mobile Moved Actions */}
+              <div className="flex flex-col gap-3">
+                <span className="text-[10px] tracking-[0.2em] uppercase font-bold text-[#C9A96E] mb-1">My Account</span>
+
+                <Link
+                  to="/cart"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex justify-between items-center py-2.5 px-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] text-sm text-[#F8F8FC] no-underline"
+                >
+                  <span className="flex items-center gap-2">
+                    <ShoppingCart size={15} className="text-[#C9A96E]" /> My Cart
+                  </span>
+                  {cartCount > 0 ? (
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold text-white bg-red-500">
+                      {cartCount}
+                    </span>
+                  ) : <span className="text-zinc-600 text-xs">Empty</span>}
+                </Link>
+
+                <Link
+                  to="/wishlist"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex justify-between items-center py-2.5 px-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] text-sm text-[#F8F8FC] no-underline"
+                >
+                  <span className="flex items-center gap-2">
+                    <Heart size={15} className="text-[#C9A96E]" /> My Wishlist
+                  </span>
+                  {wishlist.length > 0 ? (
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold text-white bg-red-500">
+                      {wishlist.length}
+                    </span>
+                  ) : <span className="text-zinc-600 text-xs">Empty</span>}
+                </Link>
+
+                <Link
+                  to="/account"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center gap-2 py-2.5 px-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] text-sm text-[#F8F8FC] no-underline"
+                >
+                  <User size={15} className="text-[#C9A96E]" /> Profile Dashboard
+                </Link>
+
+                <Link
+                  to="/login"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center justify-center gap-2 mt-2 h-11 rounded-xl font-semibold text-xs uppercase text-[#0A0A0F]"
+                  style={{ background: "linear-gradient(135deg, #C9A96E 0%, #D4B87A 100%)" }}
+                >
+                  Sign In / Register
+                </Link>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -495,7 +651,9 @@ export function Layout() {
       </footer>
 
       <style>{`
-        * { cursor: none !important; }
+        @media (pointer: fine) {
+          * { cursor: none !important; }
+        }
         @keyframes goldShimmerText { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
         @keyframes spinSlow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
         @keyframes floatWatch { 0%,100%{transform:translateY(0px) rotate(-1.5deg)} 50%{transform:translateY(-14px) rotate(1.5deg)} }
