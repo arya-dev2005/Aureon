@@ -90,6 +90,59 @@ graph TD
 
 ---
 
+## Vercel Deployment Workflow
+
+### Production Deployment
+
+Production deployments are built from the `main` branch.
+
+Required Vercel project settings:
+
+* **Production Branch:** `main`
+* **Install Command:** use Vercel default `npm install`
+* **Build Command:** `npm run build`
+* **Output Directory:** `dist`
+
+Required production environment variables:
+
+```env
+DATABASE_URL=your_neon_production_pooled_connection_string
+DIRECT_URL=your_neon_production_direct_connection_string
+JWT_SECRET=your_production_jwt_secret
+```
+
+### Staging Deployment
+
+Staging deployments should be created from the `staging` branch as Vercel Preview Deployments, or from a separate Vercel project pinned to `staging`.
+
+Recommended Vercel setup:
+
+1. Keep the main Aureon Vercel project's **Production Branch** set to `main`.
+2. Allow pushes to `staging` to create Preview Deployments.
+3. Add the required variables for the **Preview** environment in Vercel:
+   ```env
+   DATABASE_URL=your_neon_staging_pooled_connection_string
+   DIRECT_URL=your_neon_staging_direct_connection_string
+   JWT_SECRET=your_staging_jwt_secret
+   ```
+4. Use a separate Neon database or Neon branch for staging so QA does not write to production data.
+5. Trigger staging by merging or pushing verified code to `staging`.
+
+Local validation before promoting staging:
+
+```bash
+npm run typecheck
+npm run build
+```
+
+Promotion path:
+
+```text
+develop -> staging -> main
+```
+
+---
+
 ## 🔒 Repository Rules & Best Practices
 
 To enforce code quality, our GitHub configuration mandates the following rules:
