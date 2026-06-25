@@ -47,7 +47,7 @@ export function Register() {
     }
   }, [password]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !email || !phone || !password || !confirmPassword) {
       setError("Please fill in all fields.");
@@ -64,10 +64,28 @@ export function Register() {
     setLoading(true);
     setError("");
 
-    setTimeout(() => {
+    try {
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ name, email, password }),
+      });
+      const data = await response.json().catch(() => ({})) as { token?: string; error?: string };
+
+      if (!response.ok || !data.token) {
+        throw new Error(data.error ?? "Unable to create your account. Please try again.");
+      }
+
+      localStorage.setItem("aureon_token", data.token);
+      navigate("/account");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Unable to create your account. Please try again.");
+    } finally {
       setLoading(false);
-      navigate("/verify-email");
-    }, 1500);
+    }
   };
 
   return (
