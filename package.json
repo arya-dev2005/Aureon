@@ -106,5 +106,8 @@
     "overrides": {
       "vite": "8.1.0"
     }
+  },
+  "prisma": {
+    "seed": "node --loader ts-node/esm prisma/seed.ts"
   }
 }
